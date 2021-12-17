@@ -1,0 +1,129 @@
+{
+  "skeletonType": "DistributedModels",
+  "packageName": "Test123",
+  "organizationName": "Janssen",
+  "skeletonVersion": "v0.0.1",
+  
+  "targetId": 1,
+  "outcomeId": 2,
+  
+  "dataStartDate": "",
+  "dataEndDate": "",
+  
+  "populationSettings": [{
+    "minTimeAtRisk": 1,
+    "requireTimeAtRisk": false,
+    "startAnchor": "cohort start",
+    "endAnchor": "cohort start",
+    "riskWindowStart": 1,
+    "washoutPeriod": 365,
+    "includeAllOutcomes": false,
+    "priorOutcomeLookback": 9999,
+    "binary": true,
+    "removeSubjectsWithPriorOutcome": true,
+    "riskWindowEnd": 365,
+    "firstExposureOnly": true,
+    "verbosity": "INFO"
+  }],
+  
+"covariateSettings": 
+    [
+      {
+        "settings": {
+          "ObservationAnyTimePrior": true,
+          "shortTermStartDays": -30,
+          "DemographicsGender": true,
+          "MeasurementAnyTimePrior": true,
+          "includedCovariateIds": [],
+          "addDescendantsToInclude": false,
+          "ProcedureOccurrenceAnyTimePrior": true,
+          "DeviceExposureAnyTimePrior": true,
+          "mediumTermStartDays": -180,
+          "attr_class": "covariateSettings",
+          "excludedCovariateConceptIds": [],
+          "longTermStartDays": -365,
+          "DemographicsAgeGroup": true,
+          "DrugGroupEraAnyTimePrior": true,
+          "includedCovariateConceptIds": [],
+          "attr_fun": "getDbDefaultCovariateData",
+          "ConditionGroupEraAnyTimePrior": true,
+          "addDescendantsToExclude": false,
+          "temporal": false,
+          "endDays": -1
+        },
+        "fnct": "createCovariateSettings"
+      },
+      {
+        "settings": {
+          "cohortId": "115015",
+          "startDay": -9999,
+          "lnAgeInteraction": false,
+          "covariateName": "Antibiotics",
+          "endDay": -1,
+          "count": false,
+          "ageInteraction": false,
+          "covariateId": 115015457,
+          "analysisId": 457
+        },
+        "fnct": "createCohortCovariateSettings"
+      },
+      {
+        "settings": {
+          "cohortId": "303",
+          "startDay": -9999,
+          "lnAgeInteraction": false,
+          "covariateName": "Food Allergies",
+          "endDay": -1,
+          "count": false,
+          "ageInteraction": false,
+          "covariateId": 303457,
+          "analysisId": 457
+        },
+        "fnct": "createCohortCovariateSettings"
+      },
+      {
+        "settings": {
+          "cohortId": "115015",
+          "startDay": -365,
+          "lnAgeInteraction": false,
+          "covariateName": "Antibiotics",
+          "endDay": -90,
+          "count": false,
+          "ageInteraction": false,
+          "covariateId": 115015458,
+          "analysisId": 458
+        },
+        "fnct": "createCohortCovariateSettings"
+      },
+      {
+        "settings": {
+          "aggregateMethod": "mean",
+          "lnValue": null,
+          "imputationValue": 0,
+          "scaleMap": "function(x){return(x)}",
+          "startDay": -365,
+          "lnAgeInteraction": false,
+          "covariateName": "Measurement X",
+          "endDay": 5,
+          "ageInteraction": false,
+          "covariateId": 2405458,
+          "analysisId": 458,
+          "conceptSet": [
+            8765,
+            97656
+          ]
+        },
+        "fnct": "createMeasurementCovariateSettings"
+      }
+    ],
+  
+  "analysisSpecification":{
+    "<add the json for the study here>"
+  },
+  
+  "cohortDefinitions": [
+      {"<add target json>"},
+      {"<add outcome json>"}
+      ]
+
+}
