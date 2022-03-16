@@ -1,6 +1,6 @@
 # Copyright 2020 Observational Health Data Sciences and Informatics
 #
-# This file is part of DistributedModelSkeleton
+# This file is part of SkeletonDistributedModel
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,32 +17,26 @@
 #' Execute the Study
 #'
 #' @details
-#' This function executes the DistributedModelSkeleton Study.
+#' This function executes the SkeletonDistributedModel Study.
 #' 
-#' @param connectionDetails    An object of type \code{connectionDetails} as created using the
-#'                             \code{\link[DatabaseConnector]{createConnectionDetails}} function in the
-#'                             DatabaseConnector package.
-#' @param cdmDatabaseSchema    Schema name where your patient-level data in OMOP CDM format resides.
-#'                             Note that for SQL Server, this should include both the database and
-#'                             schema name, for example 'cdm_data.dbo'.
-#' @param cdmDatabaseName      Shareable name of the database 
-#' @param cohortDatabaseSchema Schema name where intermediate data can be stored. You will need to have
-#'                             write priviliges in this schema. Note that for SQL Server, this should
-#'                             include both the database and schema name, for example 'cdm_data.dbo'.
-#' @param cohortTable          The name of the table that will be created in the work database schema.
-#'                             This table will hold the target population cohorts used in this
-#'                             study.
-#' @param tempEmulationSchema  Should be used in Oracle to specify a schema where the user has write
-#'                             priviliges for storing temporary tables.
+#' @param databaseDetails      The connection details and OMOP CDM details. Created using \code{PatientLevelPrediction::createDatabaseDetails}.
+#' @param siteId               The name of your site (can be the university name, site with a number, etc.) tnis needs to be shared with the study administrator
+#' @param uri                  The Universal Resource Identifier for the cloud
+#' @param secret               The password to authenticate as siteId on uri
 #' @param outputFolder         Name of local folder to place results; make sure to use forward slashes
 #'                             (/). Do not use a folder on a network drive since this greatly impacts
 #'                             performance.
 #' @param createCohorts        Create the cohortTable table with the target population and outcome cohorts?
-#' @param runAnalyses          Run the model development
+#' @param createData           Create the labelled data set (this is required before runAnalysis)
 #' @param sampleSize           The number of patients in the target cohort to sample (if NULL uses all patients)
-#' @param packageResults       Should results be packaged for later sharing?     
-#' @param minCellCount         The minimum number of subjects contributing to a count before it can be included 
-#'                             in packaged results.
+#' @param createControl        (for the lead site only) Run this code to create the study control
+#' @param siteIds              (for the lead site only) vector with the names of all the sites contributing to the study. Required when createControl = TRUE
+#' @param leadSiteNextStep     (for the lead site only) Run this when you are ready to move to the next step
+#' @param runAnalyses          Runs the initialization, derive and estimate.  This needs to be run multiple times - the study administrator will inform you when you run.  This step 
+#'                             involves downloading the latest control json (with model specifications), fitting the model locally and then uploading the model (coefficients and ?) to 
+#'                             the cloud for the study administrator to combine.  Please note: no patient level data are transferred.
+#' @param runSynthesize        Once the site estimates are returned, it is now possible to apply each model to the data to calculate
+#'                             predictions.                          
 #' @param verbosity            Sets the level of the verbosity. If the log level is at or higher in priority than the logger threshold, a message will print. The levels are:
 #'                                         \itemize{
 #'                                         \item{DEBUG}{Highest verbosity showing all debug statements}
@@ -61,35 +55,37 @@
 #'                                              password = "secret",
 #'                                              server = "myserver")
 #'
-#' execute(connectionDetails,
-#'         cdmDatabaseSchema = "cdm_data",
-#'         cdmDatabaseName = 'shareable name of the database'
-#'         cohortDatabaseSchema = "study_results",
-#'         cohortTable = "cohort",
-#'         tempEmulationSchema = NULL,
+#' execute(databaseDetails,
+#'         siteId = 'site_1',
+#'         uri = 'get from administrator',
+#'         secret = 'hidden',
 #'         outputFolder = "c:/temp/study_results", 
 #'         createCohorts = T,
-#'         runAnalyses = T,
+#'         createData = T,
 #'         sampleSize = 10000,
-#'         packageResults = F,
-#'         minCellCount = 5,
+#'         createControl = F,
+#'         siteIds = c('site_1', 'site_2'),
+#'         leadSiteNextStep = F,
+#'         runAnalyses = F,
+#'         runSynthesize = F,
 #'         verbosity = "INFO",
 #'         cdmVersion = 5)
 #' }
 #'
 #' @export
-execute <- function(connectionDetails,
-                    cdmDatabaseSchema,
-                    cdmDatabaseName = 'friendly database name',
-                    cohortDatabaseSchema = cdmDatabaseSchema,
-                    cohortTable = "cohort",
-                    tempEmulationSchema = cohortDatabaseSchema,
+execute <- function(databaseDetails,
+                    siteId = 'site_name',
+                    uri,
+                    secret,
                     outputFolder,
                     createCohorts = F,
-                    runAnalyses = F,
+                    createData = F,
                     sampleSize = NULL,
-                    packageResults = F,
-                    minCellCount= 5,
+                    createControl = F,
+                    siteIds = '', # only needed if lead site
+                    leadSiteNextStep = F,
+                    runAnalysis = F,
+                    runSynthesize = F,
                     verbosity = "INFO",
                     cdmVersion = 5
                     ) {
@@ -98,61 +94,49 @@ execute <- function(connectionDetails,
     dir.create(outputFolder, recursive = TRUE)
   }
   
+  # load the analysis
+  analysisListFile <- system.file(
+    "settings",
+    "analysisList.json",
+    package = "SkeletonDistributedModel"
+  )
+  
+  if(file.exists(analysisListFile)){
+    analysisList <- loadJson(analysisListFile)
+    analysisList <- fromJsonFormat(analysisList)
+    analysisList$studySettings$covariateSettings <- addCohortSettings(
+      covariateSettings = analysisList$studySettings$covariateSettings,
+      cohortDatabaseSchema = databaseDetails$cohortDatabaseSchema , 
+      cohortTable = databaseDetails$cohortTable
+    )
+  }else{
+    stop('No analysisList available')
+  }
+  
   if(createCohorts) {
     ParallelLogger::logInfo("Creating cohorts")
     createCohorts(
-      connectionDetails = connectionDetails,
-      cdmDatabaseSchema = cdmDatabaseSchema,
-      cohortDatabaseSchema = cohortDatabaseSchema,
-      cohortTable = cohortTable,
-      oracleTempSchema = oracleTempSchema,
+      databaseDetails = databaseDetails,
       outputFolder = outputFolder
     )
   } 
   
-  if(runAnalyses){
-    ParallelLogger::logInfo("Running predictions")
+  if(createData){
+    ParallelLogger::logInfo("Creating labelled dataset")
 
-    analysisListFile <- system.file(
-      "settings",
-      "analysisList.json",
-      package = "DistributedModelSkeleton"
-    )
-    
-    analysisList <- ParallelLogger::loadSettingsFromJson(analysisListFile)
-    
-    databaseDetails <- PatientLevelPrediction::createDatabaseDetails(
-      connectionDetails = connectionDetails, 
-      cdmDatabaseSchema = cdmDatabaseSchema, 
-      cdmDatabaseName = cdmDatabaseName, 
-      tempEmulationSchema = tempEmulationSchema, 
-      cohortDatabaseSchema = cohortDatabaseSchema, 
-      cohortTable = cohortTable, 
-      outcomeDatabaseSchema = cohortDatabaseSchema, 
-      outcomeTable = cohortTable, 
-      cohortId = analysisList$targetId, 
-      outcomeIds = analysisList$outcomeId, 
-      cdmVersion = cdmVersion
-      )
-    
-    covariateSettings <- getCovariateSettings(analysisList)
-    restrictPlpDataSettings<- getRestrictPlpDataSettings(
-      analysisList, 
-      sampleSize
-      ) 
+    databaseDetails$cohortId <- analysisList$studySettings$targetId
+    databaseDetails$outcomeIds <- analysisList$studySettings$outcomeId
     
     plpData <- PatientLevelPrediction::getPlpData(
       databaseDetails = databaseDetails, 
-      covariateSettings = covariateSettings, 
-      restrictPlpDataSettings = restrictPlpDataSettings
+      covariateSettings = analysisList$studySettings$covariateSettings, 
+      restrictPlpDataSettings = analysisList$studySettings$restrictPlpDataSettings
       )
-    
-    populationSettings <- getPopulationSettings(analysisList) #make this
-    
+
     labels <- PatientLevelPrediction::createStudyPopulation(
       plpData = plpData, 
-      outcomeId = analysisList$outcomeId, 
-      populationSettings = populationSettings
+      outcomeId = analysisList$studySettings$outcomeId, 
+      populationSettings = analysisList$studySettings$populationSettings
     )
     
     # convert to matrix
@@ -162,24 +146,129 @@ execute <- function(connectionDetails,
       cohort = labels
     )
     
-    #sparse matrix:
-    ##dataObject$dataMatrix
+    #sparse matrix: dataObject$dataMatrix
+    #labels: dataObject$labels
     
-    #labels:
-    ##dataObject$labels
+    columnDetails <- merge(
+      dataObject$covariateMap, 
+      as.data.frame(dataObject$covariateRef), 
+      by = covariateId
+    )
+    cnames <- columnDetails$covariateName[order(columnDetails$columnId)]
     
-    # covariateRef/covariateMap
+    ipdata <- as.data.frame(dataObject$dataMatrix)
+    colnames(ipdata) <- cnames
+    ipdata$outcome <- dataObject$labels$outcomeCount
     
-
+    # save the data:
+    utils::write.csv(
+      x = ipdata, 
+      file = file.path(outputFolder, 'data'), 
+      row.names = F
+      )
   }
   
-  if(packageResults) {
-    ensure_installed("OhdsiSharing")
-    ParallelLogger::logInfo("Packaging results")
-    packageResults(dataObject,
-                   outputFolder = outputFolder,
-                   minCellCount = minCellCount
-                   )
+  # Step 1: lead site creates the control
+  if(createControl){
+    
+    ParallelLogger::logInfo('Creating the control settings')
+    
+    #check the data exist to get the names
+    if(dir.exists(file.path(outputFolder, 'data'))){
+    data <- utils::read.csv(file.path(outputFolder, 'data'))
+    } else{
+      stop('Please generate data before creating control')
+    }
+    
+    control <- list(
+      project_name = analysisList$packageName,
+      step = 'initialize',
+      sites = siteIds,
+      heterogeneity = analysisList$studySettings$control$heterogeneity,
+      model = analysisList$studySettings$control$model,
+      family = analysisList$studySettings$control$family,
+      outcome = "outcome",
+      variables = colnames(data)[colnames(data)!='outcome'],
+      optim_maxit = analysisList$studySettings$control$optim_maxit,
+      lead_site = siteId,
+      upload_date = as.character(Sys.time()) 
+    )
+    
+    # send the control to the cloud
+    pda::pda(
+      site_id = siteId, 
+      control = control, 
+      uri = uri, 
+      secret = secret
+      )
+  }
+  
+  if(leadSiteNextStep){
+    # if the lead site is ready to go to next step
+    config <- pda::getCloudConfig(
+      site_id = siteId,
+      uri = uri, 
+      secret = secret
+      )
+    pda::pdaSync(config)
+  }
+  
+  if(runAnalysis){
+    ipdata <- utils::read.csv(file.path(outputFolder, 'data'))
+    
+    config <- pda::getCloudConfig(
+      site_id = siteId,
+      uri = uri, 
+      secret = secret
+    )
+    
+    control <- tryCatch({
+      pda::pdaGet(
+      name = paste0('control'), 
+      config = config
+    )}, error = function(e){ParallelLogger::logInfo(e); return(NULL)}
+    )
+    
+    if(!is.null(control)){
+    
+    ParallelLogger::logInfo('At step ', control$step)
+      pda::pda(
+        ipdata = ipdata, 
+        site_id = siteId, 
+        uri = uri, 
+        secret = secret
+      )
+    } # control exists
+  }
+  
+  if(runSynthesize){
+    ipdata <- utils::read.csv(file.path(outputFolder, 'data'))
+    
+    config <- pda::getCloudConfig(
+      site_id = siteId,
+      uri = uri, 
+      secret = secret
+    )
+    
+    control <- pda::pdaGet(
+      name = paste0('control'), 
+      config = config
+    )
+    
+    if(control$step == 'synthesize'){
+      
+      # apply each model to the data
+      for(site in control$sites){
+        fit.odal <- pda::pdaGet(
+          name = paste0(site,'_estimate'), 
+          config = config
+        )
+        
+        # do something with this?
+        cbind(b.odal=fit.odal$btilde,
+              sd.odal=sqrt(diag(solve(fit.odal$Htilde)/nrow(ipdata))))
+      }
+    }
   }
   
   invisible(NULL)

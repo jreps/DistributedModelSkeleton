@@ -1,8 +1,8 @@
-# @file DistributedModelSkeleton.R
+# @file SkeletonDistributedModel.R
 #
 # Copyright 2020 Observational Health Data Sciences and Informatics
 #
-# This file is part of DistributedModelSkeleton
+# This file is part of SkeletonDistributedModel
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#' DistributedModelSkeleton
+#' SkeletonDistributedModel
 #' 
 #' @description A package for running distributed model studies using data in the OMOP CDM
 #'
 #' @docType package
-#' @name DistributedModelSkeleton
-#' @importFrom magrittr %>%
+#' @name SkeletonDistributedModel
 NULL
