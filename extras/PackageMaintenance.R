@@ -16,9 +16,9 @@
 
 # Format and check code ---------------------------------------------------
 OhdsiRTools::formatRFolder()
-OhdsiRTools::checkUsagePackage("DistributedModelSkeleton")
+OhdsiRTools::checkUsagePackage("SkeletonDistributedModel")
 OhdsiRTools::updateCopyrightYearFolder()
 
 # Store environment in which the study was executed -----------------------
-OhdsiRTools::insertEnvironmentSnapshotInPackage("DistributedModelSkeleton")
+OhdsiRTools::insertEnvironmentSnapshotInPackage("SkeletonDistributedModel")
 
