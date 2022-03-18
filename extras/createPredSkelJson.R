@@ -69,14 +69,14 @@ createStudyJson <- function(
   resultList$studySettings$populationSettings <- populationSettings
   
   resultList$studySettings$control <- list()
-  resultList$studySettings$control$heterogeneity <- heterogeneity
-  resultList$studySettings$control$model <- model 
-  resultList$studySettings$control$family <- family
-  resultList$studySettings$control$optim_maxit <- optim_maxit
+  resultList$studySettings$control$heterogeneity <- control$heterogeneity
+  resultList$studySettings$control$model <- control$model 
+  resultList$studySettings$control$family <- control$family
+  resultList$studySettings$control$optim_maxit <- control$optim_maxit
   
   resultList$cohortDefinitions <- getCohorts(
     outcomeId = outcomeId, 
-    cohortId = cohortId,
+    targetId = targetId,
     covariateSettings = covariateSettings,
     baseUrl = baseUrl
   )
@@ -119,7 +119,7 @@ addAttributes <- function(x){
   return(x)
 }
 
-getCohorts <- function(outcomeId, cohortId, covariateSettings, baseUrl){
+getCohorts <- function(outcomeId, targetId, covariateSettings, baseUrl){
   
   ParallelLogger::logInfo('Finding cohorts to extract')
   

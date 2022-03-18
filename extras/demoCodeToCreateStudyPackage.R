@@ -3,39 +3,95 @@
 ## Make sure you have the latest Hydra
 ##devtools::install_github('ohdsi/Hydra')
 
-outputFolder <- ''
+outputFolder <- file.path(getwd(), 'inst','settings')
 baseUrl <- ''
 
 json <- createStudyJson(
   packageName = 'exampleStudy',
   skeletonVersion = "v0.0.1",
   organizationName = 'testOrganization',
-  targetId = 1,
-  outcomeId = 2,
+  targetId = 5859,
+  outcomeId = 5861,
   restrictPlpDataSettings = PatientLevelPrediction::createRestrictPlpDataSettings(),
   populationSettings = PatientLevelPrediction::createStudyPopulationSettings(
     firstExposureOnly = T, 
     requireTimeAtRisk = F, 
-    riskWindowStart = 0, 
-    riskWindowEnd = 30
+    riskWindowStart = 0, startAnchor = 'cohort start',
+    riskWindowEnd = 7, endAnchor = 'cohort end'
   ),
   covariateSettings = list(
     PatientLevelPrediction::createCohortCovariateSettings(
-    cohortName = 'Diabetes', 
+    cohortName = 'COPD', 
+    cohortDatabaseSchema = '', cohortTable = '',
     settingId = 1, 
-    cohortId = , 
-    startDay = -365*5, 
+    cohortId = 5863, 
+    startDay = -365*100, 
     endDay = -1,
     analysisId = 566
       ),
     PatientLevelPrediction::createCohortCovariateSettings(
-      cohortName = 'COPD', 
+      cohortName = 'Cancer', 
+      cohortDatabaseSchema = '', cohortTable = '',
       settingId = 1, 
-      cohortId = , 
-      startDay = -365*5, 
+      cohortId = 5864, 
+      startDay = -365*99, 
       endDay = -1,
       analysisId = 566
     ),
+    PatientLevelPrediction::createCohortCovariateSettings(
+      cohortName = 'Diabetes', 
+      cohortDatabaseSchema = '', cohortTable = '',
+      settingId = 1, 
+      cohortId = 5865, 
+      startDay = -365*99, 
+      endDay = -1,
+      analysisId = 566
+    ),
+    PatientLevelPrediction::createCohortCovariateSettings(
+      cohortName = 'Heart disease', 
+      cohortDatabaseSchema = '', cohortTable = '',
+      settingId = 1, 
+      cohortId = 5866, 
+      startDay = -365*99, 
+      endDay = -1,
+      analysisId = 566
+    ),
+    PatientLevelPrediction::createCohortCovariateSettings(
+      cohortName = 'Hyperlipidemia', 
+      cohortDatabaseSchema = '', cohortTable = '',
+      settingId = 1, 
+      cohortId = 5867, 
+      startDay = -365*99, 
+      endDay = -1,
+      analysisId = 566
+    ),
+    PatientLevelPrediction::createCohortCovariateSettings(
+      cohortName = 'Hypertension', 
+      cohortDatabaseSchema = '', cohortTable = '',
+      settingId = 1, 
+      cohortId = 5868, 
+      startDay = -365*99, 
+      endDay = -1,
+      analysisId = 566
+    ),
+    PatientLevelPrediction::createCohortCovariateSettings(
+      cohortName = 'Kidney disease',
+      cohortDatabaseSchema = '', cohortTable = '',
+      settingId = 1, 
+      cohortId = 5869, 
+      startDay = -365*99, 
+      endDay = -1,
+      analysisId = 566
+    ),
+    PatientLevelPrediction::createCohortCovariateSettings(
+      cohortName = 'Obesity', 
+      cohortDatabaseSchema = '', cohortTable = '',
+      settingId = 1, 
+      cohortId = 5870, 
+      startDay = -365*99, 
+      endDay = -1,
+      analysisId = 566
+    )
     ),
   control = list(
     heterogeneity = FALSE,
