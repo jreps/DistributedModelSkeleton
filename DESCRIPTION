@@ -16,8 +16,9 @@ Imports:
     utils
 Suggests:
     devtools,
+    knitr,
     rmarkdown,
-    R.utils,
+    R.utils
 Remotes:
     ohdsi/PatientLevelPrediction
     ohdsi/CohortGenerator

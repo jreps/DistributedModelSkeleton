@@ -27,7 +27,9 @@ fromJsonFormat <- function(jsonList){
 }
 
 loadJson <- function(jsonFileLocation){
-  checkIsClass(jsonFileLocation, 'character')
+  if(class(jsonFileLocation != 'character')){
+    stop('Incorrect jsonFileLocation input - must be character')
+  }
   if(!file.exists(jsonFileLocation)){
     ParallelLogger::logError('Invalid directory - does not exist')
   }

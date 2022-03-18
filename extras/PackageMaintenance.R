@@ -22,3 +22,10 @@ OhdsiRTools::updateCopyrightYearFolder()
 # Store environment in which the study was executed -----------------------
 OhdsiRTools::insertEnvironmentSnapshotInPackage("SkeletonDistributedModel")
 
+OhdsiRTools::createRenvLockFile(rootPackage = "SkeletonDistributedModel",
+  includeRootPackage = FALSE,
+  additionalRequiredPackages = c(
+    "CirceR",
+    "CohortGenerator"
+  )
+)

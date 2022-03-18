@@ -32,7 +32,7 @@
 #' @param createControl        (for the lead site only) Run this code to create the study control
 #' @param siteIds              (for the lead site only) vector with the names of all the sites contributing to the study. Required when createControl = TRUE
 #' @param leadSiteNextStep     (for the lead site only) Run this when you are ready to move to the next step
-#' @param runAnalyses          Runs the initialization, derive and estimate.  This needs to be run multiple times - the study administrator will inform you when you run.  This step 
+#' @param runAnalysis          Runs the initialization, derive and estimate.  This needs to be run multiple times - the study administrator will inform you when you run.  This step 
 #'                             involves downloading the latest control json (with model specifications), fitting the model locally and then uploading the model (coefficients and ?) to 
 #'                             the cloud for the study administrator to combine.  Please note: no patient level data are transferred.
 #' @param runSynthesize        Once the site estimates are returned, it is now possible to apply each model to the data to calculate
@@ -66,7 +66,7 @@
 #'         createControl = F,
 #'         siteIds = c('site_1', 'site_2'),
 #'         leadSiteNextStep = F,
-#'         runAnalyses = F,
+#'         runAnalysis = F,
 #'         runSynthesize = F,
 #'         verbosity = "INFO",
 #'         cdmVersion = 5)
@@ -152,7 +152,7 @@ execute <- function(databaseDetails,
     columnDetails <- merge(
       dataObject$covariateMap, 
       as.data.frame(dataObject$covariateRef), 
-      by = covariateId
+      by = 'covariateId'
     )
     cnames <- columnDetails$covariateName[order(columnDetails$columnId)]
     
