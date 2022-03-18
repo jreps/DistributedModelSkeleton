@@ -1,10 +1,28 @@
 Instructions To Run Study
 ===================
-- Execute the study by running the code in (extras/CodeToRun.R) :
+- This study requires running multiple steps and submitting results to https://pda-ota.pdamethods.org/ 
+
+
+## Step 1 - Register (skip this if you already have an account)
+- register an account at https://pda-ota.pdamethods.org/
+
+## Step 2 - Sign Up for a study
+- Get the `project name` and `inviation code` from the study lead.  This will then enable you to download the control json for the study.  Please place the control.json file into the `outputFolder`.
+
+## Step 3 - Initialize
+- run the following code to create the patient level data (this is not shared) and the summary.  You need to specify the database details for the OMOP CDM database you are analyzing, `siteId` the unique reference for your site and `outputFolder` the directory you saved the control.json to.  After running the code you will see a new file in `outputFolder` called `data.csv` and `<siteId>_initialize.json`.
+
+- You now need to inspect the `<siteId>_initialize.json` and if happy log into https://pda-ota.pdamethods.org/  and upload the file.
+
+- after submitting the file, please wait for an email from the study lead before moving to step 4
+
 ```r
 library(SkeletonDistributedModel)
 # USER INPUTS
 #=======================
+
+siteId <- 'an id given to you by the study lead'
+
 # The folder where the study intermediate and result files will be written:
 outputFolder <- "C:/SkeletonDistributedModelResults"
 
@@ -52,23 +70,101 @@ sampleSize <- NULL
 
 execute(
   databaseDetails = databaseDetails,
-  siteId = 'site_name',
-  uri,
-  secret,
-  outputFolder,
-  createCohorts = F,
-  createData = F,
-  sampleSize = NULL,
-  createControl = F,
-  siteIds = '', # only needed if lead site
-  leadSiteNextStep = F,
-  runAnalysis = F,
-  runSynthesize = F,
-  verbosity = "INFO",
-  cdmVersion = 5
+  siteId = siteId,
+  outputFolder = outputFolder,
+  createCohorts = T,
+  createData = T,
+  runInitialize = T,
+  verbosity = "INFO"
         )
 ```
 
-The 'createCohorts' option will create the target and outcome cohorts into cohortDatabaseSchema.cohortTable if set to T.  
 
-...
+## Step 4 - Derive
+- If you have an email from the study lead telling you to progress to the derive step, please log into https://pda-ota.pdamethods.org/ and download the new control.json into `outputFolder`.
+
+- You can now run the following code to create the `<siteId>_derive.json` 
+
+- You now need to inspect the `<siteId>_derive.json` and if happy log into https://pda-ota.pdamethods.org/  and upload the file.
+
+- after submitting the file, please wait for an email from the study lead before moving to step 5
+
+```r
+library(SkeletonDistributedModel)
+# USER INPUTS
+#=======================
+
+siteId <- 'an id given to you by the study lead'
+
+# The folder where the study intermediate and result files will be written:
+outputFolder <- "C:/SkeletonDistributedModelResults"
+
+
+#=======================
+
+execute(
+  siteId = siteId,
+  outputFolder = outputFolder,
+  runDerive = T,
+  verbosity = "INFO"
+        )
+```
+
+## Step 5 - Estimate
+- If you have an email from the study lead telling you to progress to the estimate step, please log into https://pda-ota.pdamethods.org/ and download the new control.json into `outputFolder`.
+
+- You can now run the following code to create the `<siteId>_estimate.json` 
+
+- You now need to inspect the `<siteId>_estimate.json` and if happy log into https://pda-ota.pdamethods.org/  and upload the file.
+
+- after submitting the file, please wait for an email from the study lead before moving to step 6
+
+```r
+library(SkeletonDistributedModel)
+# USER INPUTS
+#=======================
+
+siteId <- 'an id given to you by the study lead'
+
+# The folder where the study intermediate and result files will be written:
+outputFolder <- "C:/SkeletonDistributedModelResults"
+
+
+#=======================
+
+execute(
+  siteId = siteId,
+  outputFolder = outputFolder,
+  runEstimate = T,
+  verbosity = "INFO"
+        )
+```
+
+## Step 5 - Synthesize (not required for all studies)
+- If you have an email from the study lead telling you to progress to the synthesize step, please log into https://pda-ota.pdamethods.org/ and download the new control.json into `outputFolder`.
+
+- You can now run the following code to apply the model to your data.  
+
+- You now need to inspect the object and if happy log into https://pda-ota.pdamethods.org/  and upload the file.
+
+
+```r
+library(SkeletonDistributedModel)
+# USER INPUTS
+#=======================
+
+siteId <- 'an id given to you by the study lead'
+
+# The folder where the study intermediate and result files will be written:
+outputFolder <- "C:/SkeletonDistributedModelResults"
+
+
+#=======================
+
+execute(
+  siteId = siteId,
+  outputFolder = outputFolder,
+  runSynthesize = T,
+  verbosity = "INFO"
+        )
+```

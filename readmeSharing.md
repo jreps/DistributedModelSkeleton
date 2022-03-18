@@ -29,4 +29,4 @@ Instructions to Install and Execute from GitHub
 
 Results
 ========================================================
-Once executed you will find multiple csv files in the specified outputFolder.
+Once executed you will find multiple json/csv files in the specified outputFolder.

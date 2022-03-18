@@ -21,9 +21,7 @@
 #' 
 #' @param databaseDetails      The connection details and OMOP CDM details. Created using \code{PatientLevelPrediction::createDatabaseDetails}.
 #' @param siteId               The name of your site (can be the university name, site with a number, etc.) tnis needs to be shared with the study administrator
-#' @param uri                  The Universal Resource Identifier for the cloud
-#' @param secret               The password to authenticate as siteId on uri
-#' @param outputFolder         Name of local folder to place results; make sure to use forward slashes
+#' @param outputFolder         Name of local folder to place results - make sure control is in here; make sure to use forward slashes
 #'                             (/). Do not use a folder on a network drive since this greatly impacts
 #'                             performance.
 #' @param createCohorts        Create the cohortTable table with the target population and outcome cohorts?
@@ -31,12 +29,11 @@
 #' @param sampleSize           The number of patients in the target cohort to sample (if NULL uses all patients)
 #' @param createControl        (for the lead site only) Run this code to create the study control
 #' @param siteIds              (for the lead site only) vector with the names of all the sites contributing to the study. Required when createControl = TRUE
-#' @param leadSiteNextStep     (for the lead site only) Run this when you are ready to move to the next step
-#' @param runAnalysis          Runs the initialization, derive and estimate.  This needs to be run multiple times - the study administrator will inform you when you run.  This step 
-#'                             involves downloading the latest control json (with model specifications), fitting the model locally and then uploading the model (coefficients and ?) to 
-#'                             the cloud for the study administrator to combine.  Please note: no patient level data are transferred.
+#' @param runInitialize        Runs the initialization step - this require downloading the json control from https://pda-ota.pdamethods.org/ 
+#' @param runDerive            Runs the derive step - this require downloading the updated json control from https://pda-ota.pdamethods.org/ 
+#' @param runEstimate          Runs the estimate step - this require downloading the updated json control from https://pda-ota.pdamethods.org/ 
 #' @param runSynthesize        Once the site estimates are returned, it is now possible to apply each model to the data to calculate
-#'                             predictions.                          
+#'                             predictions.  This step requires downloading the updated json control from https://pda-ota.pdamethods.org/                        
 #' @param verbosity            Sets the level of the verbosity. If the log level is at or higher in priority than the logger threshold, a message will print. The levels are:
 #'                                         \itemize{
 #'                                         \item{DEBUG}{Highest verbosity showing all debug statements}
@@ -46,7 +43,6 @@
 #'                                         \item{ERROR}{Show error messages}
 #'                                         \item{FATAL}{Be silent except for fatal errors}
 #'                                         }                              
-#' @param cdmVersion           The version of the common data model                       
 #'
 #' @examples
 #' \dontrun{
@@ -57,8 +53,6 @@
 #'
 #' execute(databaseDetails,
 #'         siteId = 'site_1',
-#'         uri = 'get from administrator',
-#'         secret = 'hidden',
 #'         outputFolder = "c:/temp/study_results", 
 #'         createCohorts = T,
 #'         createData = T,
@@ -68,15 +62,13 @@
 #'         leadSiteNextStep = F,
 #'         runAnalysis = F,
 #'         runSynthesize = F,
-#'         verbosity = "INFO",
-#'         cdmVersion = 5)
+#'         verbosity = "INFO"
+#'         )
 #' }
 #'
 #' @export
 execute <- function(databaseDetails,
                     siteId = 'site_name',
-                    uri,
-                    secret,
                     outputFolder,
                     createCohorts = F,
                     createData = F,
@@ -84,15 +76,21 @@ execute <- function(databaseDetails,
                     createControl = F,
                     siteIds = '', # only needed if lead site
                     leadSiteNextStep = F,
-                    runAnalysis = F,
+                    runInitialize = F,
+                    runDerive = F,
+                    runEstimate = F,
                     runSynthesize = F,
-                    verbosity = "INFO",
-                    cdmVersion = 5
+                    verbosity = "INFO"
                     ) {
   
   if (!file.exists(outputFolder)){
     dir.create(outputFolder, recursive = TRUE)
   }
+  
+  website <- 'https://pda-ota.pdamethods.org/'
+  
+  # json control file
+  jsonFileLocation <- file.path(outputFolder, 'control.json')
   
   # load the analysis
   analysisListFile <- system.file(
@@ -163,7 +161,7 @@ execute <- function(databaseDetails,
     # save the data:
     utils::write.csv(
       x = ipdata, 
-      file = file.path(outputFolder, 'data'), 
+      file = file.path(outputFolder, 'data.csv'), 
       row.names = F
       )
   }
@@ -174,8 +172,8 @@ execute <- function(databaseDetails,
     ParallelLogger::logInfo('Creating the control settings')
     
     #check the data exist to get the names
-    if(dir.exists(file.path(outputFolder, 'data'))){
-    data <- utils::read.csv(file.path(outputFolder, 'data'))
+    if(dir.exists(file.path(outputFolder, 'data.csv'))){
+      data <- utils::read.csv(file.path(outputFolder, 'data.csv'))
     } else{
       stop('Please generate data before creating control')
     }
@@ -194,81 +192,127 @@ execute <- function(databaseDetails,
       upload_date = as.character(Sys.time()) 
     )
     
-    # send the control to the cloud
-    pda::pda(
-      site_id = siteId, 
-      control = control, 
-      uri = uri, 
-      secret = secret
-      )
-  }
-  
-  if(leadSiteNextStep){
-    # if the lead site is ready to go to next step
-    config <- pda::getCloudConfig(
-      site_id = siteId,
-      uri = uri, 
-      secret = secret
-      )
-    pda::pdaSync(config)
-  }
-  
-  if(runAnalysis){
-    ipdata <- utils::read.csv(file.path(outputFolder, 'data'))
-    
-    config <- pda::getCloudConfig(
-      site_id = siteId,
-      uri = uri, 
-      secret = secret
+    control <- jsonlite::toJSON(
+      x = control, 
+      pretty = T, 
+      digits = 23, 
+      auto_unbox=TRUE, 
+      null = "null"
     )
     
-    control <- tryCatch({
-      pda::pdaGet(
-      name = paste0('control'), 
-      config = config
-    )}, error = function(e){ParallelLogger::logInfo(e); return(NULL)}
-    )
+    write(control, file.path(outputFolder, 'control.json'))
+    
+    ParallelLogger::logInfo(
+      paste0(
+        'Initial control create at: ',
+        file.path(outputFolder, 'control.json'),
+        ' please upload this to ', website
+        
+        )
+      )
+
+  }
+
+  
+  if(runInitialize){
+    
+    control <- tryCatch(
+      {readChar(jsonFileLocation, file.info(jsonFileLocation)$size)},
+      error= function(cond) {
+        ParallelLogger::logInfo('Issue with loading json file...');
+        ParallelLogger::logError(cond)
+      })
+    
+    ipdata <- utils::read.csv(file.path(outputFolder, 'data.csv'))
+    
     
     if(!is.null(control)){
+      if(control$step == 'initialize'){
     
-    ParallelLogger::logInfo('At step ', control$step)
+    ParallelLogger::logInfo(paste0('At step ', control$step))
       pda::pda(
         ipdata = ipdata, 
         site_id = siteId, 
-        uri = uri, 
-        secret = secret
+        dir = outputFolder
       )
+      
+      ParallelLogger::logInfo(paste0('result json ready to check in ', outputFolder))
+      ParallelLogger::logInfo(paste0('If you are happy to share, please upload this to ', website))
+      
     } # control exists
+    } else{
+      ParallelLogger::logInfo('Control is not for initialize - please check control stage')
+    }
+  }
+  
+  if(runDerive){
+    
+    control <- tryCatch(
+      {readChar(jsonFileLocation, file.info(jsonFileLocation)$size)},
+      error= function(cond) {
+        ParallelLogger::logInfo('Issue with loading json file...');
+        ParallelLogger::logError(cond)
+      })
+    
+    ipdata <- utils::read.csv(file.path(outputFolder, 'data.csv'))
+    
+    
+    if(!is.null(control)){
+      if(control$step == 'derive'){
+        
+        ParallelLogger::logInfo(paste0('At step ', control$step))
+        pda::pda(
+          ipdata = ipdata, 
+          site_id = siteId, 
+          dir = outputFolder
+        )
+        
+        ParallelLogger::logInfo(paste0('result json ready to check in ', outputFolder))
+        ParallelLogger::logInfo(paste0('If you are happy to share, please upload this to ', website))
+        
+      } # control exists
+    } else{
+      ParallelLogger::logInfo('Control is not for derive - please check control stage')
+    }
+  }
+  
+  if(runEstimate){
+    
+    control <- tryCatch(
+      {readChar(jsonFileLocation, file.info(jsonFileLocation)$size)},
+      error= function(cond) {
+        ParallelLogger::logInfo('Issue with loading json file...');
+        ParallelLogger::logError(cond)
+      })
+    
+    ipdata <- utils::read.csv(file.path(outputFolder, 'data.csv'))
+    
+    
+    if(!is.null(control)){
+      if(control$step == 'estimate'){
+        
+        ParallelLogger::logInfo(paste0('At step ', control$step))
+        pda::pda(
+          ipdata = ipdata, 
+          site_id = siteId, 
+          dir = outputFolder
+        )
+        
+        ParallelLogger::logInfo(paste0('result json ready to check in ', outputFolder))
+        ParallelLogger::logInfo(paste0('If you are happy to share, please upload this to ', website))
+        
+      } # control exists
+    } else{
+      ParallelLogger::logInfo('Control is not for estimate - please check control stage')
+    }
   }
   
   if(runSynthesize){
-    ipdata <- utils::read.csv(file.path(outputFolder, 'data'))
-    
-    config <- pda::getCloudConfig(
-      site_id = siteId,
-      uri = uri, 
-      secret = secret
-    )
-    
-    control <- pda::pdaGet(
-      name = paste0('control'), 
-      config = config
-    )
-    
-    if(control$step == 'synthesize'){
-      
-      # apply each model to the data
-      for(site in control$sites){
-        fit.odal <- pda::pdaGet(
-          name = paste0(site,'_estimate'), 
-          config = config
-        )
-        
-        # do something with this?
-        cbind(b.odal=fit.odal$btilde,
-              sd.odal=sqrt(diag(solve(fit.odal$Htilde)/nrow(ipdata))))
-      }
-    }
+    #ipdata <- utils::read.csv(file.path(outputFolder, 'data'))
+    # do something with this?
+    #cbind(b.odal=fit.odal$btilde,
+    #  sd.odal=sqrt(diag(solve(fit.odal$Htilde)/nrow(ipdata))))
+  
   }
   
   invisible(NULL)

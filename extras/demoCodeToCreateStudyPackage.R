@@ -3,7 +3,7 @@
 ## Make sure you have the latest Hydra
 ##devtools::install_github('ohdsi/Hydra')
 
-outputFolder <- file.path(getwd(), 'inst','settings')
+outputFolder <- file.path('D:/testing', 'packages')
 baseUrl <- ''
 
 json <- createStudyJson(

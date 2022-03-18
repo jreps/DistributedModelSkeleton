@@ -1,129 +1,1859 @@
 {
-  "skeletonType": "DistributedModels",
-  "packageName": "Test123",
-  "organizationName": "Janssen",
+  "skeletonType": "DistributedModelStudy",
+  "packageName": "exampleStudy",
   "skeletonVersion": "v0.0.1",
-  
-  "targetId": 1,
-  "outcomeId": 2,
-  
-  "dataStartDate": "",
-  "dataEndDate": "",
-  
-  "populationSettings": [{
-    "minTimeAtRisk": 1,
-    "requireTimeAtRisk": false,
-    "startAnchor": "cohort start",
-    "endAnchor": "cohort start",
-    "riskWindowStart": 1,
-    "washoutPeriod": 365,
-    "includeAllOutcomes": false,
-    "priorOutcomeLookback": 9999,
-    "binary": true,
-    "removeSubjectsWithPriorOutcome": true,
-    "riskWindowEnd": 365,
-    "firstExposureOnly": true,
-    "verbosity": "INFO"
-  }],
-  
-"covariateSettings": 
-    [
+  "organizationName": "testOrganization",
+  "studySettings": {
+    "targetId": 5859,
+    "outcomeId": 5861,
+    "covariateSettings": [
       {
-        "settings": {
-          "ObservationAnyTimePrior": true,
-          "shortTermStartDays": -30,
-          "DemographicsGender": true,
-          "MeasurementAnyTimePrior": true,
-          "includedCovariateIds": [],
-          "addDescendantsToInclude": false,
-          "ProcedureOccurrenceAnyTimePrior": true,
-          "DeviceExposureAnyTimePrior": true,
-          "mediumTermStartDays": -180,
-          "attr_class": "covariateSettings",
-          "excludedCovariateConceptIds": [],
-          "longTermStartDays": -365,
-          "DemographicsAgeGroup": true,
-          "DrugGroupEraAnyTimePrior": true,
-          "includedCovariateConceptIds": [],
-          "attr_fun": "getDbDefaultCovariateData",
-          "ConditionGroupEraAnyTimePrior": true,
-          "addDescendantsToExclude": false,
-          "temporal": false,
-          "endDays": -1
-        },
-        "fnct": "createCovariateSettings"
+        "covariateName": "COPD",
+        "covariateId": 586301566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5863,
+        "startDay": -36500,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
       },
       {
-        "settings": {
-          "cohortId": "115015",
-          "startDay": -9999,
-          "lnAgeInteraction": false,
-          "covariateName": "Antibiotics",
-          "endDay": -1,
-          "count": false,
-          "ageInteraction": false,
-          "covariateId": 115015457,
-          "analysisId": 457
-        },
-        "fnct": "createCohortCovariateSettings"
+        "covariateName": "Cancer",
+        "covariateId": 586401566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5864,
+        "startDay": -36135,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
       },
       {
-        "settings": {
-          "cohortId": "303",
-          "startDay": -9999,
-          "lnAgeInteraction": false,
-          "covariateName": "Food Allergies",
-          "endDay": -1,
-          "count": false,
-          "ageInteraction": false,
-          "covariateId": 303457,
-          "analysisId": 457
-        },
-        "fnct": "createCohortCovariateSettings"
+        "covariateName": "Diabetes",
+        "covariateId": 586501566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5865,
+        "startDay": -36135,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
       },
       {
-        "settings": {
-          "cohortId": "115015",
-          "startDay": -365,
-          "lnAgeInteraction": false,
-          "covariateName": "Antibiotics",
-          "endDay": -90,
-          "count": false,
-          "ageInteraction": false,
-          "covariateId": 115015458,
-          "analysisId": 458
-        },
-        "fnct": "createCohortCovariateSettings"
+        "covariateName": "Heart disease",
+        "covariateId": 586601566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5866,
+        "startDay": -36135,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
       },
       {
-        "settings": {
-          "aggregateMethod": "mean",
-          "lnValue": null,
-          "imputationValue": 0,
-          "scaleMap": "function(x){return(x)}",
-          "startDay": -365,
-          "lnAgeInteraction": false,
-          "covariateName": "Measurement X",
-          "endDay": 5,
-          "ageInteraction": false,
-          "covariateId": 2405458,
-          "analysisId": 458,
-          "conceptSet": [
-            8765,
-            97656
-          ]
-        },
-        "fnct": "createMeasurementCovariateSettings"
+        "covariateName": "Hyperlipidemia",
+        "covariateId": 586701566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5867,
+        "startDay": -36135,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
+      },
+      {
+        "covariateName": "Hypertension",
+        "covariateId": 586801566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5868,
+        "startDay": -36135,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
+      },
+      {
+        "covariateName": "Kidney disease",
+        "covariateId": 586901566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5869,
+        "startDay": -36135,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
+      },
+      {
+        "covariateName": "Obesity",
+        "covariateId": 587001566,
+        "cohortDatabaseSchema": "",
+        "cohortTable": "",
+        "cohortId": 5870,
+        "startDay": -36135,
+        "endDay": -1,
+        "count": false,
+        "ageInteraction": false,
+        "lnAgeInteraction": false,
+        "analysisId": 566,
+        "attributes": {
+          "names": ["covariateName", "covariateId", "cohortDatabaseSchema", "cohortTable", "cohortId", "startDay", "endDay", "count", "ageInteraction", "lnAgeInteraction", "analysisId"],
+          "fun": "PatientLevelPrediction::getCohortCovariateData",
+          "class": "covariateSettings"
+        }
       }
     ],
-  
-  "analysisSpecification":{
-    "<add the json for the study here>"
+    "restrictPlpDataSettings": {
+      "studyStartDate": "",
+      "studyEndDate": "",
+      "firstExposureOnly": false,
+      "washoutPeriod": 0,
+      "sampleSize": null,
+      "attributes": {
+        "names": ["studyStartDate", "studyEndDate", "firstExposureOnly", "washoutPeriod", "sampleSize"],
+        "class": "restrictPlpDataSettings"
+      }
+    },
+    "populationSettings": {
+      "binary": true,
+      "includeAllOutcomes": true,
+      "firstExposureOnly": true,
+      "washoutPeriod": 0,
+      "removeSubjectsWithPriorOutcome": true,
+      "priorOutcomeLookback": 99999,
+      "requireTimeAtRisk": false,
+      "minTimeAtRisk": 364,
+      "riskWindowStart": 0,
+      "startAnchor": "cohort start",
+      "riskWindowEnd": 7,
+      "endAnchor": "cohort end",
+      "restrictTarToCohortEnd": false,
+      "attributes": {
+        "names": ["binary", "includeAllOutcomes", "firstExposureOnly", "washoutPeriod", "removeSubjectsWithPriorOutcome", "priorOutcomeLookback", "requireTimeAtRisk", "minTimeAtRisk", "riskWindowStart", "startAnchor", "riskWindowEnd", "endAnchor", "restrictTarToCohortEnd"],
+        "class": "populationSettings"
+      }
+    },
+    "control": {
+      "heterogeneity": false,
+      "model": "ODAL",
+      "family": "binomial",
+      "optim_maxit": 100
+    }
   },
-  
   "cohortDefinitions": [
-      {"<add target json>"},
-      {"<add outcome json>"}
-      ]
-
+    {
+      "id": 5861,
+      "name": "[dGEM] outcome death",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623229180,
+      "modifiedDate": 1647623257856,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "Death": {"DeathTypeExclude":false}
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"All"}
+        },
+        "ConceptSets": [],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"All"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5859,
+      "name": "[dGEM] target covid hospitalization",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623131981,
+      "modifiedDate": 1647623209910,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "VisitOccurrence": {
+                "CodesetId": 5,
+                "OccurrenceStartDate": {"Value":"2020-01-01","Op":"bt","Extent":"2020-09-30"},
+                "VisitTypeExclude": false,
+                "Age": {
+                  "Value": 18,
+                  "Op": "gte"
+                }
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"All"}
+        },
+        "AdditionalCriteria": {
+          "Type": "ANY",
+          "CriteriaList": [
+            {
+              "Criteria": {
+                "Measurement": {
+                  "CodesetId": 1,
+                  "MeasurementTypeExclude": false
+                }
+              },
+              "StartWindow": {
+                "Start": {"Days":21,"Coeff":-1},
+                "End": {"Coeff":1},
+                "UseIndexEnd": false,
+                "UseEventEnd": false
+              },
+              "EndWindow": {
+                "Start": {"Coeff":-1},
+                "End": {"Days":0,"Coeff":1},
+                "UseIndexEnd": true,
+                "UseEventEnd": false
+              },
+              "RestrictVisit": false,
+              "IgnoreObservationPeriod": false,
+              "Occurrence": {
+                "Type": 2,
+                "Count": 1,
+                "IsDistinct": false
+              }
+            },
+            {
+              "Criteria": {
+                "Measurement": {
+                  "CodesetId": 2,
+                  "MeasurementTypeExclude": false,
+                  "ValueAsConcept": [
+                    {
+                      "CONCEPT_ID": 4126681,
+                      "CONCEPT_NAME": "Detected",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "260373001",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "SNOMED",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 45877985,
+                      "CONCEPT_NAME": "Detected",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "LA11882-0",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "LOINC",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 9191,
+                      "CONCEPT_NAME": "Positive",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "10828004",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "SNOMED",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 45884084,
+                      "CONCEPT_NAME": "Positive",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "LA6576-8",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "LOINC",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 4181412,
+                      "CONCEPT_NAME": "Present",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "52101004",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "SNOMED",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 45879438,
+                      "CONCEPT_NAME": "Present",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "LA9633-4",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "LOINC",
+                      "CONCEPT_CLASS_ID": null
+                    }
+                  ]
+                }
+              },
+              "StartWindow": {
+                "Start": {"Days":21,"Coeff":-1},
+                "End": {"Coeff":1},
+                "UseIndexEnd": false,
+                "UseEventEnd": false
+              },
+              "EndWindow": {
+                "Start": {"Coeff":-1},
+                "End": {"Days":0,"Coeff":1},
+                "UseIndexEnd": true,
+                "UseEventEnd": false
+              },
+              "RestrictVisit": false,
+              "IgnoreObservationPeriod": false,
+              "Occurrence": {
+                "Type": 2,
+                "Count": 1,
+                "IsDistinct": false
+              }
+            },
+            {
+              "Criteria": {
+                "Observation": {
+                  "CodesetId": 2,
+                  "ObservationTypeExclude": false,
+                  "ValueAsConcept": [
+                    {
+                      "CONCEPT_ID": 4126681,
+                      "CONCEPT_NAME": "Detected",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "260373001",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "SNOMED",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 45877985,
+                      "CONCEPT_NAME": "Detected",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "LA11882-0",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "LOINC",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 9191,
+                      "CONCEPT_NAME": "Positive",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "10828004",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "SNOMED",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 45884084,
+                      "CONCEPT_NAME": "Positive",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "LA6576-8",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "LOINC",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 4181412,
+                      "CONCEPT_NAME": "Present",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "52101004",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "SNOMED",
+                      "CONCEPT_CLASS_ID": null
+                    },
+                    {
+                      "CONCEPT_ID": 45879438,
+                      "CONCEPT_NAME": "Present",
+                      "STANDARD_CONCEPT": null,
+                      "STANDARD_CONCEPT_CAPTION": "Unknown",
+                      "INVALID_REASON": null,
+                      "INVALID_REASON_CAPTION": "Unknown",
+                      "CONCEPT_CODE": "LA9633-4",
+                      "DOMAIN_ID": "Meas Value",
+                      "VOCABULARY_ID": "LOINC",
+                      "CONCEPT_CLASS_ID": null
+                    }
+                  ]
+                }
+              },
+              "StartWindow": {
+                "Start": {"Days":21,"Coeff":-1},
+                "End": {"Coeff":1},
+                "UseIndexEnd": false,
+                "UseEventEnd": false
+              },
+              "EndWindow": {
+                "Start": {"Coeff":-1},
+                "End": {"Days":0,"Coeff":1},
+                "UseIndexEnd": true,
+                "UseEventEnd": false
+              },
+              "RestrictVisit": false,
+              "IgnoreObservationPeriod": false,
+              "Occurrence": {
+                "Type": 2,
+                "Count": 1,
+                "IsDistinct": false
+              }
+            },
+            {
+              "Criteria": {
+                "ConditionOccurrence": {
+                  "CodesetId": 4,
+                  "ConditionTypeExclude": false
+                }
+              },
+              "StartWindow": {
+                "Start": {"Days":21,"Coeff":-1},
+                "End": {"Coeff":1},
+                "UseIndexEnd": false,
+                "UseEventEnd": false
+              },
+              "EndWindow": {
+                "Start": {"Coeff":-1},
+                "End": {"Days":0,"Coeff":1},
+                "UseIndexEnd": true,
+                "UseEventEnd": false
+              },
+              "RestrictVisit": false,
+              "IgnoreObservationPeriod": false,
+              "Occurrence": {
+                "Type": 2,
+                "Count": 1,
+                "IsDistinct": false
+              }
+            }
+          ],
+          "DemographicCriteriaList": [],
+          "Groups": []
+        },
+        "ConceptSets": [
+          {
+            "id": 1,
+            "name": "SARS-CoV-2 positive test measurement pre-coordinated",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 37310282,
+                    "CONCEPT_NAME": "2019 novel coronavirus detected",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "1240581000000104",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 2,
+            "name": "SARS-CoV-2 test measurement",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 756055,
+                    "CONCEPT_NAME": "Measurement of severe acute respiratory syndrome coronavirus 2",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "OMOP4873969",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "OMOP Extension",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 37310281,
+                    "CONCEPT_NAME": "2019 novel coronavirus not detected",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "1240591000000102",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 4,
+            "name": "COVID-19 conditions",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 37311061,
+                    "CONCEPT_NAME": "Disease caused by severe acute respiratory syndrome coronavirus 2",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "840539006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4100065,
+                    "CONCEPT_NAME": "Disease due to Coronaviridae",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "27619001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 439676,
+                    "CONCEPT_NAME": "Coronavirus infection",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "186747009",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 37311060,
+                    "CONCEPT_NAME": "Suspected disease caused by severe acute respiratory coronavirus 2",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "840544004",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Context-dependent"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 5,
+            "name": "Inpatient Visit",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 262,
+                    "CONCEPT_NAME": "Emergency Room and Inpatient Visit",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "ERIP",
+                    "DOMAIN_ID": "Visit",
+                    "VOCABULARY_ID": "Visit",
+                    "CONCEPT_CLASS_ID": "Visit"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 9201,
+                    "CONCEPT_NAME": "Inpatient Visit",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "IP",
+                    "DOMAIN_ID": "Visit",
+                    "VOCABULARY_ID": "Visit",
+                    "CONCEPT_CLASS_ID": "Visit"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [
+          {
+            "name": "has >=180 day prior observation",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ObservationPeriod": {}
+                  },
+                  "StartWindow": {
+                    "Start": {"Coeff":-1},
+                    "End": {"Days":180,"Coeff":-1},
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "EndWindow": {
+                    "Start": {"Days":0,"Coeff":-1},
+                    "End": {"Coeff":1},
+                    "UseIndexEnd": false,
+                    "UseEventEnd": true
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 1,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": [],
+              "Groups": []
+            }
+          }
+        ],
+        "EndStrategy": {
+          "DateOffset": {
+            "DateField": "EndDate",
+            "Offset": 0
+          }
+        },
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 90
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5863,
+      "name": "[dGEM] variable COPD",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623334627,
+      "modifiedDate": 1647623343545,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[Covid v1] chronic obstructive lung disease (COPD)",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 255573,
+                    "CONCEPT_NAME": "Chronic obstructive lung disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "13645005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 255841,
+                    "CONCEPT_NAME": "Chronic bronchitis",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "63480004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5864,
+      "name": "[dGEM] variable cancer",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623437969,
+      "modifiedDate": 1647623449308,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[Covid v1] Malignant neoplasms excluding non-melanoma skin cancer",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4112752,
+                    "CONCEPT_NAME": "Basal cell carcinoma of skin",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "254701007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443392,
+                    "CONCEPT_NAME": "Malignant neoplastic disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "363346000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4111921,
+                    "CONCEPT_NAME": "Squamous cell carcinoma of skin",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "254651007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5865,
+      "name": "[dGEM] variable diabetes",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623490313,
+      "modifiedDate": 1647623522097,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[Covid v1] Diabetes",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 201820,
+                    "CONCEPT_NAME": "Diabetes mellitus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "73211009",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443238,
+                    "CONCEPT_NAME": "Diabetic - poor control",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "268519009",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 442793,
+                    "CONCEPT_NAME": "Complication due to diabetes mellitus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "74627003",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 435216,
+                    "CONCEPT_NAME": "Disorder due to type 1 diabetes mellitus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "420868002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443732,
+                    "CONCEPT_NAME": "Disorder due to type 2 diabetes mellitus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "422014003",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4327944,
+                    "CONCEPT_NAME": "Malnutrition related diabetes mellitus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "75524006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5866,
+      "name": "[dGEM] variable heart disease",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623541978,
+      "modifiedDate": 1647623576105,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[COVID v1] Heart disease",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 321588,
+                    "CONCEPT_NAME": "Heart disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "56265001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5867,
+      "name": "[dGEM] variable hyperlipidemia",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623607557,
+      "modifiedDate": 1647623641978,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[COVID V1] Hyperlipidemia",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 432867,
+                    "CONCEPT_NAME": "Hyperlipidemia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "55822004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5868,
+      "name": "[dGEM] variable hypertension",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623682202,
+      "modifiedDate": 1647623721490,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[COVID v1] Hypertension",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 316866,
+                    "CONCEPT_NAME": "Hypertensive disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "38341003",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5869,
+      "name": "[dGEM] variable kidney disease",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623745466,
+      "modifiedDate": 1647623778848,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[Covid v1] Kidney disease",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 198124,
+                    "CONCEPT_NAME": "Kidney disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "90708001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 197921,
+                    "CONCEPT_NAME": "Renal osteodystrophy",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "16726004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4301680,
+                    "CONCEPT_NAME": "Dialysis care",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "385971003",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4032243,
+                    "CONCEPT_NAME": "Dialysis procedure",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "108241001",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4019967,
+                    "CONCEPT_NAME": "Dependence on renal dialysis",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "105502003",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4090651,
+                    "CONCEPT_NAME": "Dialysis finding",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "251859005",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    },
+    {
+      "id": 5870,
+      "name": "[dGEM] variable obesity",
+      "createdBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "modifiedBy": {
+        "id": 1043,
+        "name": "eu\\jreps",
+        "login": "eu\\jreps"
+      },
+      "createdDate": 1647623825057,
+      "modifiedDate": 1647623855299,
+      "hasWriteAccess": false,
+      "tags": [],
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "Measurement": {
+                "CodesetId": 0,
+                "MeasurementTypeExclude": false,
+                "ValueAsNumber": {
+                  "Value": 30,
+                  "Op": "bt",
+                  "Extent": 60
+                }
+              }
+            },
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 1,
+                "ConditionTypeExclude": false
+              }
+            },
+            {
+              "Observation": {
+                "CodesetId": 1,
+                "ObservationTypeExclude": false
+              }
+            },
+            {
+              "Measurement": {
+                "CodesetId": 2,
+                "MeasurementTypeExclude": false,
+                "ValueAsNumber": {
+                  "Value": 120,
+                  "Op": "bt",
+                  "Extent": 200
+                },
+                "Unit": [
+                  {
+                    "CONCEPT_ID": 9529,
+                    "CONCEPT_NAME": "kilogram",
+                    "STANDARD_CONCEPT": null,
+                    "STANDARD_CONCEPT_CAPTION": "Unknown",
+                    "INVALID_REASON": null,
+                    "INVALID_REASON_CAPTION": "Unknown",
+                    "CONCEPT_CODE": "kg",
+                    "DOMAIN_ID": "Unit",
+                    "VOCABULARY_ID": "UCUM",
+                    "CONCEPT_CLASS_ID": null
+                  }
+                ]
+              }
+            },
+            {
+              "Observation": {
+                "CodesetId": 2,
+                "ObservationTypeExclude": false,
+                "ValueAsNumber": {
+                  "Value": 120,
+                  "Op": "bt",
+                  "Extent": 200
+                },
+                "Unit": [
+                  {
+                    "CONCEPT_ID": 9529,
+                    "CONCEPT_NAME": "kilogram",
+                    "STANDARD_CONCEPT": null,
+                    "STANDARD_CONCEPT_CAPTION": "Unknown",
+                    "INVALID_REASON": null,
+                    "INVALID_REASON_CAPTION": "Unknown",
+                    "CONCEPT_CODE": "kg",
+                    "DOMAIN_ID": "Unit",
+                    "VOCABULARY_ID": "UCUM",
+                    "CONCEPT_CLASS_ID": null
+                  }
+                ]
+              }
+            }
+          ],
+          "ObservationWindow": {"PriorDays":0,"PostDays":0},
+          "PrimaryCriteriaLimit": {"Type":"First"}
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "BMI measurement",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 3038553,
+                    "CONCEPT_NAME": "Body mass index (BMI) [Ratio]",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "39156-5",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 36304833,
+                    "CONCEPT_NAME": "Body mass index (BMI) [Ratio] Estimated",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "89270-3",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 1,
+            "name": "obesity diagnoses",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4060985,
+                    "CONCEPT_NAME": "Body mass index 30+ - obesity",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "162864005",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4256640,
+                    "CONCEPT_NAME": "Body mass index 40+ - severely obese",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "408512008",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 45766204,
+                    "CONCEPT_NAME": "Lymphedema associated with obesity",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "703316004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 433736,
+                    "CONCEPT_NAME": "Obesity",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "414916001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4176962,
+                    "CONCEPT_NAME": "Obesity associated disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "363247006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4081038,
+                    "CONCEPT_NAME": "Pulmonary hypertension with extreme obesity",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "276792008",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 2,
+            "name": "body weight",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 3025315,
+                    "CONCEPT_NAME": "Body weight",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "29463-7",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4099154,
+                    "CONCEPT_NAME": "Body weight",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "27113001",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Observable Entity"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 3013762,
+                    "CONCEPT_NAME": "Body weight Measured",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "3141-9",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 3027492,
+                    "CONCEPT_NAME": "Dry body weight Measured",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "8341-0",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 3023166,
+                    "CONCEPT_NAME": "Body weight Stated",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "3142-7",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4264825,
+                    "CONCEPT_NAME": "Birth weight",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "364589006",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Observable Entity"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {"Type":"First"},
+        "ExpressionLimit": {"Type":"First"},
+        "InclusionRules": [],
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION"
+    }
+  ]
 }
