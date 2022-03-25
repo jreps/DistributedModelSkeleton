@@ -7,7 +7,7 @@ outputFolder <- file.path('D:/testing', 'packages')
 baseUrl <- ''
 
 json <- createStudyJson(
-  packageName = 'exampleStudy',
+  packageName = 'dGEMcovid',
   skeletonVersion = "v0.0.1",
   organizationName = 'testOrganization',
   targetId = 5859,
@@ -18,7 +18,12 @@ json <- createStudyJson(
     requireTimeAtRisk = F, 
     riskWindowStart = 0, startAnchor = 'cohort start',
     riskWindowEnd = 7, endAnchor = 'cohort end'
-  ),
+  ), 
+  dataCovariateSettings = createDataCovariateSettings(
+    numberOfVisits = T, 
+    visitTypeCount = T, 
+    dateStart = '20200101'
+    ),
   covariateSettings = list(
     
     FeatureExtraction::createCovariateSettings(

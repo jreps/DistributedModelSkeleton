@@ -9,10 +9,12 @@ Depends:
     R(>= 3.6.0)
 Imports:
     CohortGenerator,
+    DatabaseConnector,
     jsonlite,
     PatientLevelPrediction (>= 5.0.2),
     ParallelLogger,
     pda,
+    SqlRender,
     utils
 Suggests:
     devtools,

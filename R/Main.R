@@ -159,12 +159,39 @@ execute <- function(databaseDetails,
       file = file.path(outputFolder, 'data.csv'), 
       row.names = F
     )
+    
+    # add the data covariates
+    
+    if(!is.null(analysisList$studySettings$dataCovariateSettings)){
+    dataSummary <- do.call(
+      dataSummary, 
+      list(
+        dataCovariateSettings = analysisList$studySettings$dataCovariateSettings,
+        databaseDetails = databaseDetails
+        )
+    )
+    
+    utils::write.csv(
+      x = dataSummary, 
+      file = file.path(outputFolder, 'dataSummary.csv'), 
+      row.names = F
+    )
+    
+    }
+    
   }
   
   # Step 1: lead site creates the control
   if(createControl){
     
     ParallelLogger::logInfo('Creating the control settings')
+    
+    #check the data exist to get the names
+    if(file.exists(file.path(outputFolder, 'dataSummary.csv'))){
+      dataSummary <- utils::read.csv(file.path(outputFolder, 'dataSummary.csv'))
+    } else{
+      dataSummary <- NULL
+    }
     
     #check the data exist to get the names
     if(file.exists(file.path(outputFolder, 'data.csv'))){
@@ -182,6 +209,7 @@ execute <- function(databaseDetails,
       family = analysisList$studySettings$control$family,
       outcome = "outcome",
       variables = colnames(data)[colnames(data)!='outcome'],
+      variables_site_level = names(dataSummary),
       optim_maxit = analysisList$studySettings$control$optim_maxit,
       lead_site = siteId,
       upload_date = as.character(Sys.time()) 
@@ -223,8 +251,16 @@ execute <- function(databaseDetails,
         ParallelLogger::logInfo('Issue with loading json file...');
         ParallelLogger::logError(cond)
       })
+    control <- jsonlite::fromJSON(control)
     
     ipdata <- utils::read.csv(file.path(outputFolder, 'data.csv'))
+    
+    # get summary variables
+    if(file.exists(file.path(outputFolder, 'dataSummary.csv'))){
+      dataSummary <- utils::read.csv(file.path(outputFolder, 'dataSummary.csv'))
+    } else{
+      dataSummary <- NULL
+    }
     
     
     if(!is.null(control)){
@@ -233,6 +269,7 @@ execute <- function(databaseDetails,
     ParallelLogger::logInfo(paste0('At step ', control$step))
       pda::pda(
         ipdata = ipdata, 
+        hosdata = dataSummary,
         site_id = siteId, 
         dir = outputFolder
       )
@@ -254,9 +291,16 @@ execute <- function(databaseDetails,
         ParallelLogger::logInfo('Issue with loading json file...');
         ParallelLogger::logError(cond)
       })
+    control <- jsonlite::fromJSON(control)
     
     ipdata <- utils::read.csv(file.path(outputFolder, 'data.csv'))
     
+    # get summary variables
+    if(file.exists(file.path(outputFolder, 'dataSummary.csv'))){
+      dataSummary <- utils::read.csv(file.path(outputFolder, 'dataSummary.csv'))
+    } else{
+      dataSummary <- NULL
+    }
     
     if(!is.null(control)){
       if(control$step == 'derive'){
@@ -264,6 +308,7 @@ execute <- function(databaseDetails,
         ParallelLogger::logInfo(paste0('At step ', control$step))
         pda::pda(
           ipdata = ipdata, 
+          hosdata = dataSummary,
           site_id = siteId, 
           dir = outputFolder
         )
@@ -285,9 +330,16 @@ execute <- function(databaseDetails,
         ParallelLogger::logInfo('Issue with loading json file...');
         ParallelLogger::logError(cond)
       })
+    control <- jsonlite::fromJSON(control)
     
     ipdata <- utils::read.csv(file.path(outputFolder, 'data.csv'))
     
+    # get summary variables
+    if(file.exists(file.path(outputFolder, 'dataSummary.csv'))){
+      dataSummary <- utils::read.csv(file.path(outputFolder, 'dataSummary.csv'))
+    } else{
+      dataSummary <- NULL
+    }
     
     if(!is.null(control)){
       if(control$step == 'estimate'){
@@ -295,6 +347,7 @@ execute <- function(databaseDetails,
         ParallelLogger::logInfo(paste0('At step ', control$step))
         pda::pda(
           ipdata = ipdata, 
+          hosdata = dataSummary,
           site_id = siteId, 
           dir = outputFolder
         )

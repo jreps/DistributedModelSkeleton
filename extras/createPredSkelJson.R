@@ -7,6 +7,7 @@ createStudyJson <- function(
   restrictPlpDataSettings,
   populationSettings = list(),
   covariateSettings = list(),
+  dataCovariateSettings = createDataCovariateSettings(),
   control = list(
     heterogeneity = FALSE,
     model = 'ODAL',
@@ -65,6 +66,7 @@ createStudyJson <- function(
   resultList$studySettings$targetId <- targetId
   resultList$studySettings$outcomeId <- outcomeId
   resultList$studySettings$covariateSettings <- covariateSettings
+  resultList$studySettings$dataCovariateSettings <- dataCovariateSettings
   resultList$studySettings$restrictPlpDataSettings <- restrictPlpDataSettings
   resultList$studySettings$populationSettings <- populationSettings
   
@@ -147,6 +149,25 @@ getCohorts <- function(outcomeId, targetId, covariateSettings, baseUrl){
   }
   
   return(cohortDefinitions)
+  
+}
+
+
+createDataCovariateSettings <- function(
+  numberOfVisits = T,
+  visitTypeCount = T,
+  dateStart = '20050101',
+  dateEnd = gsub('-','', Sys.Date())
+  ){
+  
+  settings <- list(
+    numberOfVisits = numberOfVisits,
+    visitTypeCount = visitTypeCount,
+    dateStart = dateStart,
+    dateEnd =dateEnd
+    )
+  
+  return(settings)
   
 }
 
