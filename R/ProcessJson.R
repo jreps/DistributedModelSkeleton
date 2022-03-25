@@ -27,7 +27,7 @@ fromJsonFormat <- function(jsonList){
 }
 
 loadJson <- function(jsonFileLocation){
-  if(class(jsonFileLocation != 'character')){
+  if(class(jsonFileLocation) != 'character'){
     stop('Incorrect jsonFileLocation input - must be character')
   }
   if(!file.exists(jsonFileLocation)){
@@ -52,6 +52,7 @@ loadJson <- function(jsonFileLocation){
 extractAttributes <- function(x){
   attr <- x$attributes
   x$attributes <- NULL
+  attr$names <- names(x)
   attributes(x) <- attr
   return(x)
 }

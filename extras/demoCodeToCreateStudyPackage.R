@@ -20,6 +20,16 @@ json <- createStudyJson(
     riskWindowEnd = 7, endAnchor = 'cohort end'
   ),
   covariateSettings = list(
+    
+    FeatureExtraction::createCovariateSettings(
+      useDemographicsAgeGroup = T,
+      useDemographicsGender = T,
+      useDemographicsRace = T, 
+      useVisitCountLongTerm = T, 
+      useVisitConceptCountLongTerm = T, 
+      useCharlsonIndex = T
+      ),
+    
     PatientLevelPrediction::createCohortCovariateSettings(
     cohortName = 'COPD', 
     cohortDatabaseSchema = '', cohortTable = '',

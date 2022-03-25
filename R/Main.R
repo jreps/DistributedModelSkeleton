@@ -89,9 +89,6 @@ execute <- function(databaseDetails,
   
   website <- 'https://pda-ota.pdamethods.org/'
   
-  # json control file
-  jsonFileLocation <- file.path(outputFolder, 'control.json')
-  
   # load the analysis
   analysisListFile <- system.file(
     "settings",
@@ -147,15 +144,13 @@ execute <- function(databaseDetails,
     #sparse matrix: dataObject$dataMatrix
     #labels: dataObject$labels
     
-    columnDetails <- merge(
-      dataObject$covariateMap, 
-      as.data.frame(dataObject$covariateRef), 
-      by = 'covariateId'
-    )
+    columnDetails <- as.data.frame(dataObject$covariateRef)
+    
     cnames <- columnDetails$covariateName[order(columnDetails$columnId)]
     
-    ipdata <- as.data.frame(dataObject$dataMatrix)
-    colnames(ipdata) <- cnames
+    ipMat <- as.matrix(dataObject$dataMatrix)
+    ipdata <- as.data.frame(ipMat)
+    colnames(ipdata) <-  makeFriendlyNames(cnames)
     ipdata$outcome <- dataObject$labels$outcomeCount
     
     # save the data:
@@ -163,7 +158,7 @@ execute <- function(databaseDetails,
       x = ipdata, 
       file = file.path(outputFolder, 'data.csv'), 
       row.names = F
-      )
+    )
   }
   
   # Step 1: lead site creates the control
@@ -172,7 +167,7 @@ execute <- function(databaseDetails,
     ParallelLogger::logInfo('Creating the control settings')
     
     #check the data exist to get the names
-    if(dir.exists(file.path(outputFolder, 'data.csv'))){
+    if(file.exists(file.path(outputFolder, 'data.csv'))){
       data <- utils::read.csv(file.path(outputFolder, 'data.csv'))
     } else{
       stop('Please generate data before creating control')
@@ -211,6 +206,12 @@ execute <- function(databaseDetails,
         )
       )
 
+  }
+  
+  if(runInitialize | runDerive | runEstimate | runSynthesize){
+    # json control file
+    jsonFileLocation <- file.path(outputFolder, 'control.json')
+    
   }
 
   
@@ -319,5 +320,10 @@ execute <- function(databaseDetails,
 }
 
 
-
-
+makeFriendlyNames <- function(columnNames){
+  
+  columnNames <- gsub("[[:punct:]]", " ", columnNames)
+  columnNames <- gsub(" ", "_", columnNames)
+  return(columnNames)
+  
+}
